@@ -8,8 +8,8 @@
     Title="mercadito">
 
     <ShellContent
-        Title="Home"
+        Title="Mercadito"
         ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+        Route="MainPage"/>
 
 </Shell>
