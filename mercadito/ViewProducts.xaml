@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="mercadito.ViewProducts"
+             Title="ViewProducts">
+
+
+    <Frame Margin="10" Padding="0,10,0,10" BorderColor="Transparent">
+       
+        <ScrollView>
+           
+
+            <VerticalStackLayout Margin="0" >
+
+                <HorizontalStackLayout>
+                    <Label Text="Productos" FontSize="20" TextColor="Black" FontAttributes="Bold" Padding="15,0,0,0" Margin="0"/>
+                    <Button x:Name="actualizar" Clicked="actualizar_Clicked" Text="ACTUALIZAR" Margin="100,0,0,20" HorizontalOptions="EndAndExpand"/>
+                </HorizontalStackLayout>
+
+                <Rectangle Fill="#ededed" HeightRequest="2"  HorizontalOptions="StartAndExpand" />
+                
+
+                <VerticalStackLayout x:Name="productStackLayout">
+              
+
+    
+
+
+                </VerticalStackLayout>
+            
+
+            
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Frame>
+
+</ContentPage>
