@@ -169,24 +169,46 @@ public partial class ViewProducts : ContentPage
                 {
                     // Aquí puedes agregar la lógica para procesar la compra
                     //await DisplayAlert("Compra", "Has comprado " + producto.nombre, "Aceptar");
-                    string result = await DisplayPromptAsync("Seleccionado: " + producto.nombre, "Cantidad disponible: " + producto.cantidad, "Comprar", "Cancelar", "Cantidad a comprar", maxLength: 10, keyboard: Keyboard.Numeric);
+                    string result = await DisplayPromptAsync("Seleccionado: " + producto.nombre, "Cantidad disponible: " + producto.cantidad, "Add", "Cancelar", "Quantity to add", maxLength: 10, keyboard: Keyboard.Numeric);
 
 
 
                     if (result != "" && result != null)
                     {
 
-                        // Haz algo con el valor ingresado
-                        await _dbService.create(new Cart
-                        {
-                            Nombre = producto.nombre,
-                            Descripcion = producto.descripcion,
-                            Imagen = EnviromentVariables.apiBaseURL + producto.imagen,
-                            Precio = producto.precio ,
-                            Cantidad = int.Parse(result)
-                        });
+                        
+                        var product = await _dbService.getByproductId(producto.id);
 
-                        IToast toastAdd = Toast.Make("Añadido al carrito", ToastDuration.Long, 20);
+                        if(product == null)
+                        {
+                            await _dbService.create(new Cart
+                            {
+                                productId = producto.id,
+                                Nombre = producto.nombre,
+                                Descripcion = producto.descripcion,
+                                Imagen = EnviromentVariables.apiBaseURL + producto.imagen,
+                                Precio = producto.precio,
+                                Cantidad = int.Parse(result)
+                            });
+                        }
+                        else
+                        {
+                            await _dbService.update(new Cart
+                            {
+                                Id = product.Id,
+                                productId = product.productId,
+                                Nombre = product.Nombre,
+                                Descripcion = product.Descripcion,
+                                Imagen = product.Imagen,
+                                Precio = product.Precio,
+                                Cantidad = product.Cantidad + int.Parse(result)
+
+                            });
+                        }
+
+                        
+
+                        IToast toastAdd = Toast.Make("Added to cart", ToastDuration.Long, 20);
                         toastAdd.Show();
 
                     }
@@ -233,17 +255,25 @@ public partial class ViewProducts : ContentPage
     private async Task<int> comprar(int id, int cantidad)
     {
 
-       // string bearerToken = EnviromentVariables.APITOKEN; // Suponiendo que tienes una clase llamada EnviromentVariables con una propiedad APITOKEN
-       
+        // string bearerToken = EnviromentVariables.APITOKEN; // Suponiendo que tienes una clase llamada EnviromentVariables con una propiedad APITOKEN
+
+        
+
+        var listaProductos = new List<object>
+        {
+            new { ProductoId = id, Cantidad = cantidad }
+        };
+
         var parametrosObject = new
         {
-            producto_id = id,
-            cantidad = cantidad
+            productos = listaProductos
         };
+
+
 
         var Parametrosjson = JsonSerializer.Serialize(parametrosObject);
 
-
+        Console.WriteLine(Parametrosjson);
         var parametros = new StringContent(Parametrosjson, Encoding.UTF8, "application/json");
         
 

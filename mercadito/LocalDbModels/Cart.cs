@@ -10,6 +10,9 @@ namespace mercadito.LocalDbModels
         [Column("id")]
         public int Id { get; set; }
 
+        [Column("productId")]
+        public int productId { get; set; }
+
         [Column("nombre")]
         public string Nombre { get; set; }
 
