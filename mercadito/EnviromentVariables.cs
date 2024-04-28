@@ -8,9 +8,9 @@ namespace mercadito
 {
     public static class EnviromentVariables
     {
-        public static string apiBaseURL { get; set; } = "https://apiappmovil.profekadi.com";
+        public static string apiBaseURL { get; set; } = "https://apiquiz2movil.profekadi.com";
 
-        public static string APITOKEN { get; set; } = "7";
+        //public static string APITOKEN { get; set; } = "7";
 
     }
 }

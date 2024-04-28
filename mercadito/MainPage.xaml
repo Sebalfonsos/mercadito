@@ -3,24 +3,30 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="mercadito.MainPage">
 
-    <ScrollView>
-        <VerticalStackLayout Padding="30,0" Spacing="25" BackgroundColor="White">
-            <Image Source="login.png" HeightRequest="100" Aspect="AspectFit"/>
+    <VerticalStackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+        <ActivityIndicator x:Name="indicadorCargando" IsVisible="True" IsRunning="True" Color="Blue" />
 
-            <Border StrokeShape="RoundRectangle 40,40,40,40" StrokeThickness="4"  Padding="16,8">
-                <Entry x:Name="EmailEntry" Placeholder="Correo electrónico" TextColor="Black"/>
-            </Border>
+        <ScrollView x:Name="vistaLogin" IsVisible="False">
+            <VerticalStackLayout Padding="30,0" Spacing="25" BackgroundColor="White">
+                <Image Source="login.png" HeightRequest="100" Aspect="AspectFit"/>
 
-            <Border StrokeShape="RoundRectangle 40,40,40,40" StrokeThickness="4"  Padding="16,8">
-                <Entry x:Name="PasswordEntry" Placeholder="Contraseña" IsPassword="True" TextColor="Black"/>
-            </Border>
+                <Border StrokeShape="RoundRectangle 40,40,40,40" StrokeThickness="4"  Padding="16,8">
+                    <Entry x:Name="EmailEntry" Placeholder="Correo electrónico" TextColor="Black"/>
+                </Border>
 
-            <Button x:Name="Login" Text="Iniciar sesión" Clicked="Login_Clicked" HorizontalOptions="Fill" BackgroundColor="gray" CornerRadius="40"/>
+                <Border StrokeShape="RoundRectangle 40,40,40,40" StrokeThickness="4"  Padding="16,8">
+                    <Entry x:Name="PasswordEntry" Placeholder="Contraseña" IsPassword="True" TextColor="Black"/>
+                </Border>
 
-            <Button x:Name="Register" Text="Registrar" Clicked="Register_Clicked" HorizontalOptions="Fill" BackgroundColor="Gray" CornerRadius="40"/>
+                <Button x:Name="Login" Text="Iniciar sesión" Clicked="Login_Clicked" HorizontalOptions="Fill" BackgroundColor="gray" CornerRadius="40"/>
 
-        </VerticalStackLayout>
-    </ScrollView>
+                <Button x:Name="Register" Text="Registrar" Clicked="Register_Clicked" HorizontalOptions="Fill" BackgroundColor="Gray" CornerRadius="40"/>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+    </VerticalStackLayout>
+    
 
 
 </ContentPage>

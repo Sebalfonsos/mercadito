@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="mercadito.CartView"
+             Title="CartView">
+    <FlexLayout Direction="Column">
+        <!--<VerticalStackLayout Padding="10" FlexLayout.Basis="600" BackgroundColor="Beige">
+            <Entry x:Name="nombreEntry" Placeholder="nombre"/>
+            <Entry x:Name="descripcionEntry" Placeholder="descripcion"/>
+            <Entry x:Name="imagenEntry" Placeholder="imagenURL"/>
+            <Entry x:Name="precioEntry" Placeholder="precio"/>
+            <Entry x:Name="cantidadEntry" Placeholder="cantidad"/>
+            <Button x:Name="saveButton" Text="save" Clicked="saveButton_Clicked"/>
+        </VerticalStackLayout>-->
+        <ListView x:Name="listView" FlexLayout.Grow="1" HasUnevenRows="True" ItemTapped="listView_ItemTapped">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Padding="5">
+                            <HorizontalStackLayout>
+                                <Image Source="{Binding Imagen}" WidthRequest="120" HeightRequest="120" VerticalOptions="Center" HorizontalOptions="EndAndExpand" Margin="10"/>
+                                <StackLayout Padding="5" HorizontalOptions="StartAndExpand">
+                                    <Label Text="{Binding Nombre}" FontSize="18" TextColor="Black" Margin="0,10,5,0"/>
+                                    <Label Text="{Binding Cantidad, StringFormat='Cantidad: {0}'}" FontSize="12.5" TextColor="Black" Margin="0,10,5,0"/>
+                                    <Label Text="{Binding Precio, StringFormat='Precio: ${0:F2}'}" FontSize="17" TextColor="Black" Margin="0,5,5,0"/>
+                                </StackLayout>
+                            </HorizontalStackLayout>
+                            
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+
+    </FlexLayout>
+</ContentPage>

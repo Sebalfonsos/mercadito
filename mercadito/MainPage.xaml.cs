@@ -13,21 +13,60 @@ namespace mercadito
     {
         int count = 0;
         private HttpClient _httpClient;
-
+        private readonly LocalDbService _dbService;
         CommunityToolkit.Maui.Core.IToast toast = Toast.Make("Wrong Email or Password", CommunityToolkit.Maui.Core.ToastDuration.Short,30);
 
-        public MainPage()
+        public MainPage(LocalDbService dbService)
         {
 
-
             InitializeComponent();
+            _dbService = dbService;
             _httpClient = new HttpClient();
             _httpClient.BaseAddress = new Uri(EnviromentVariables.apiBaseURL);
-          
 
-            //getInfo();
 
-           
+            verifyToken();
+
+
+        }
+
+        public async void verifyToken()
+        {
+            bool removerIndicador = false;
+            string bearerToken = Preferences.Get("Token", string.Empty);
+
+            
+            if (!string.IsNullOrEmpty(bearerToken))
+            {
+                // Establecer el token de portador en el encabezado de autorización
+                _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", bearerToken);
+
+                // Establecer el encabezado 'Accept' en la solicitud
+                _httpClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage response = await _httpClient.GetAsync("/api/validateToken");
+
+                if ((int)response.StatusCode == 200)
+                {
+                    var viewProductsPage = new NavigationPage(new ViewProducts(_dbService));
+                    Application.Current.MainPage = viewProductsPage;
+                }
+                else
+                {
+                    removerIndicador= true;
+                }
+
+            }
+            else
+            {
+                removerIndicador = true;
+            }
+            
+            if(removerIndicador){
+                indicadorCargando.IsVisible = false;
+                vistaLogin.IsVisible = true;
+            }
+
         }
 
         public async void getInfo()
@@ -75,14 +114,16 @@ namespace mercadito
                 UserLogged.ApiResponse respuesta = JsonSerializer.Deserialize<UserLogged.ApiResponse>(content);
 
 
-                EnviromentVariables.APITOKEN = respuesta.token;
+                //EnviromentVariables.APITOKEN = respuesta.token;
+                Preferences.Set("Token", respuesta.token);
+
                 EmailEntry.IsEnabled = false;
                 PasswordEntry.IsEnabled = false;
 
                 EmailEntry.IsEnabled = true;
                 PasswordEntry.IsEnabled = true;
-
-                Navigation.PushAsync(new ViewProducts());
+                var viewProductsPage = new NavigationPage(new ViewProducts(_dbService));
+                Application.Current.MainPage = viewProductsPage;
             }
             else
             {

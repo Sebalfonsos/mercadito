@@ -19,6 +19,8 @@ namespace mercadito
 
 #if DEBUG
     		builder.Logging.AddDebug();
+            builder.Services.AddSingleton<LocalDbService>();
+            builder.Services.AddTransient<MainPage>();
 #endif
 
             return builder.Build();

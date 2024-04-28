@@ -4,35 +4,41 @@
              x:Class="mercadito.ViewProducts"
              Title="ViewProducts">
 
+    <RefreshView x:Name="refreshView">
+        
+   
+        <Frame Margin="10" Padding="0,10,0,10" BorderColor="Transparent">
 
-    <Frame Margin="10" Padding="0,10,0,10" BorderColor="Transparent">
-       
-        <ScrollView>
-           
+            <ScrollView>
 
-            <VerticalStackLayout Margin="0" >
 
-                <HorizontalStackLayout>
-                    <Label Text="Productos" FontSize="20" TextColor="Black" FontAttributes="Bold" Padding="15,0,0,0" Margin="0"/>
-                    <Button x:Name="actualizar" Clicked="actualizar_Clicked" Text="ACTUALIZAR" Margin="100,0,0,20" HorizontalOptions="EndAndExpand"/>
-                </HorizontalStackLayout>
+                <VerticalStackLayout Margin="0" >
 
-                <Rectangle Fill="#ededed" HeightRequest="2"  HorizontalOptions="StartAndExpand" />
-                
+                    <HorizontalStackLayout>
+                        <!--<Label Text="Productos" FontSize="20" TextColor="Black" FontAttributes="Bold" Padding="15,10,0,0" />-->
+                        <!--<Button x:Name="actualizar" Clicked="actualizar_Clicked" Text="ACTUALIZAR" Margin="100,0,0,20" HorizontalOptions="EndAndExpand"/>-->
+                        <Button x:Name="verCarrito" Clicked="verCarrito_Clicked" Text="View Cart" Margin="20,0,0,20" HorizontalOptions="EndAndExpand"/>
+                        <Button x:Name="closeSesion" Clicked="closeSesion_Clicked" Text="Close Sesion" Margin="120,0,0,20" HorizontalOptions="EndAndExpand"/>
+                    </HorizontalStackLayout>
 
-                <VerticalStackLayout x:Name="productStackLayout">
-              
+                    <Rectangle Fill="#ededed" HeightRequest="2"  HorizontalOptions="StartAndExpand" />
 
-    
+
+                    <VerticalStackLayout x:Name="productStackLayout">
+
+
+
+
+
+                    </VerticalStackLayout>
+
+
 
 
                 </VerticalStackLayout>
-            
+            </ScrollView>
+        </Frame>
+    </RefreshView>
 
-            
-
-            </VerticalStackLayout>
-        </ScrollView>
-    </Frame>
 
 </ContentPage>
